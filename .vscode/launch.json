@@ -1,0 +1,47 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET Core Launch (AdventOfCode2025)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/AdventOfCode2025/bin/Debug/net10.0/AdventOfCode2025.dll",
+      "args": ["1", "1"],
+      "cwd": "${workspaceFolder}/AdventOfCode2025",
+      "stopAtEntry": false,
+      "console": "internalConsole",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    {
+      "name": ".NET Core Launch (Day 1, Puzzle 1)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/AdventOfCode2025/bin/Debug/net10.0/AdventOfCode2025.dll",
+      "args": ["1", "1"],
+      "cwd": "${workspaceFolder}/AdventOfCode2025",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    },
+    {
+      "name": ".NET Core Launch (Day 1, Puzzle 2)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/AdventOfCode2025/bin/Debug/net10.0/AdventOfCode2025.dll",
+      "args": ["1", "2"],
+      "cwd": "${workspaceFolder}/AdventOfCode2025",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach"
+    }
+  ]
+}
+

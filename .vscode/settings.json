@@ -1,0 +1,16 @@
+{
+  "dotnet.defaultSolution": "AdventOfCode2025.sln",
+  "omnisharp.enableRoslynAnalyzers": true,
+  "omnisharp.enableEditorConfigSupport": true,
+  "omnisharp.enableImportCompletion": true,
+  "omnisharp.organizeImportsOnFormat": true,
+  "dotnet.server.useOmnisharp": false,
+  "[csharp]": {
+    "editor.defaultFormatter": "ms-dotnettools.csharp",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  }
+}
+
