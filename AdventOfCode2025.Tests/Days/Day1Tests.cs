@@ -28,7 +28,7 @@ L82";
     public void Puzzle1_WithInputFile_ShouldReturnExpectedResult()
     {
         string input = File.ReadAllText(
-            Path.Combine("..", "..", "..", "..", "AdventOfCode2025", "input", "day1puzzle1input.txt")
+            Path.Combine("..", "..", "..", "..", "AdventOfCode2025", "input", "day1input.txt")
         );
 
         Assert.Equal("1135", _day1.SolvePuzzle1(input));
@@ -44,7 +44,7 @@ L82";
     public void Puzzle2_WithInputFile_ShouldReturnExpectedResult()
     {
         string input = File.ReadAllText(
-            Path.Combine("..", "..", "..", "..", "AdventOfCode2025", "input", "day1puzzle2input.txt")
+            Path.Combine("..", "..", "..", "..", "AdventOfCode2025", "input", "day1input.txt")
         );
 
         Assert.Equal("6558", _day1.SolvePuzzle1(input));
