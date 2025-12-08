@@ -30,7 +30,7 @@ if (puzzleInstance == null)
 }
 
 // Read input file
-string inputFilePath = Path.Combine("input", $"day{day}puzzle{puzzle}input.txt");
+string inputFilePath = Path.Combine(Directory.GetCurrentDirectory(), "AdventOfCode2025", "input", $"day{day}puzzle{puzzle}input.txt");
 if (!File.Exists(inputFilePath))
 {
     Console.Error.WriteLine($"Input file not found: {inputFilePath}");
