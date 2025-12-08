@@ -6,11 +6,6 @@ namespace AdventOfCode2025;
 public interface IPuzzle
 {
     /// <summary>
-    /// Gets the sample input for this puzzle (hard-coded string from puzzle description).
-    /// </summary>
-    string SampleInput { get; }
-
-    /// <summary>
     /// Solves puzzle 1 for the given input.
     /// </summary>
     /// <param name="input">The puzzle input.</param>
