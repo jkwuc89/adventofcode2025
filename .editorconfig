@@ -1,0 +1,49 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# All files
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+tab_width = 4
+
+# C# files
+[*.cs]
+# Enforce Allman style: opening braces on a new line, 4 spaces for indentation
+# This is Microsoft's official C# coding convention
+dotnet_style_qualification_for_field = false
+dotnet_style_qualification_for_property = false
+dotnet_style_qualification_for_method = false
+dotnet_style_qualification_for_event = false
+
+# Code style rules
+csharp_style_namespace_declarations = file_scoped:warning
+csharp_style_prefer_method_group_conversion = true:warning
+csharp_style_prefer_expression_bodied_methods = false:warning
+csharp_style_prefer_expression_bodied_properties = true:warning
+csharp_style_prefer_expression_bodied_indexers = true:warning
+csharp_style_prefer_expression_bodied_operators = false:warning
+csharp_style_prefer_expression_bodied_constructors = false:warning
+csharp_style_prefer_expression_bodied_local_functions = false:warning
+
+# Formatting rules - Allman style (braces on new line)
+# Note: Brace placement is enforced by IDE formatter settings
+# Visual Studio / Rider / VS Code C# extension will respect Allman style
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+csharp_new_line_before_members_in_object_initializers = true
+csharp_new_line_before_members_in_anonymous_types = true
+csharp_new_line_between_query_expression_clauses = true
+
+# Markdown files - allow trailing whitespace (useful for line breaks)
+[*.md]
+trim_trailing_whitespace = false
+
