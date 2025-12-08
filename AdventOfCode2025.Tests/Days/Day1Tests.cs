@@ -1,3 +1,4 @@
+using System.IO;
 using AdventOfCode2025.Days;
 
 namespace AdventOfCode2025.Tests.Days;
@@ -24,17 +25,29 @@ L82";
     }
 
     [Fact]
+    public void Puzzle1_WithInputFile_ShouldReturnExpectedResult()
+    {
+        string input = File.ReadAllText(
+            Path.Combine("..", "..", "..", "..", "AdventOfCode2025", "input", "day1puzzle1input.txt")
+        );
+
+        Assert.Equal("1135", _day1.SolvePuzzle1(input));
+    }
+
+    [Fact]
     public void Puzzle2_WithSampleInput_ShouldReturnExpectedResult()
     {
-        // Arrange
-        string input = SampleInput;
+        Assert.Equal("6", _day1.SolvePuzzle2(SampleInput));
+    }
 
-        // Act
-        string result = _day1.SolvePuzzle2(input);
+    [Fact]
+    public void Puzzle2_WithInputFile_ShouldReturnExpectedResult()
+    {
+        string input = File.ReadAllText(
+            Path.Combine("..", "..", "..", "..", "AdventOfCode2025", "input", "day1puzzle2input.txt")
+        );
 
-        // Assert
-        // TODO: Update expected value once puzzle solution is implemented
-        Assert.NotNull(result);
+        Assert.Equal("6558", _day1.SolvePuzzle1(input));
     }
 }
 
