@@ -30,7 +30,7 @@ if (puzzleInstance == null)
 }
 
 // Read input file
-string inputFilePath = Path.Combine(Directory.GetCurrentDirectory(), "AdventOfCode2025", "input", $"day{day}puzzle{puzzle}input.txt");
+string inputFilePath = Path.Combine(Directory.GetCurrentDirectory(), "AdventOfCode2025", "input", $"day{day}input.txt");
 if (!File.Exists(inputFilePath))
 {
     Console.Error.WriteLine($"Input file not found: {inputFilePath}");
@@ -51,6 +51,7 @@ static IPuzzle? GetPuzzleInstance(int day)
     return day switch
     {
         1 => new Day1(),
+        2 => new Day2(),
         // Add more days as they are implemented
         _ => null
     };
