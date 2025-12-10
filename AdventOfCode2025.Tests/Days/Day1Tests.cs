@@ -5,7 +5,7 @@ namespace AdventOfCode2025.Tests.Days;
 
 public class Day1Tests
 {
-    private readonly Day1 _day1 = new();
+    private readonly Day1 _day1 = new Day1();
 
     private const string SampleInput = @"L68
 L30
@@ -47,7 +47,7 @@ L82";
             Path.Combine("..", "..", "..", "..", "AdventOfCode2025", "input", "day1input.txt")
         );
 
-        Assert.Equal("6558", _day1.SolvePuzzle1(input));
+        Assert.Equal("6558", _day1.SolvePuzzle2(input));
     }
 }
 
