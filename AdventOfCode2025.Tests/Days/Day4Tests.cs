@@ -6,8 +6,6 @@ namespace AdventOfCode2025.Tests.Days;
 
 public class Day4Tests
 {
-    private readonly Day4 _day4 = new();
-
     private const string SampleInput = @"..@@.@@@@.
 @@@.@.@.@@
 @@@@@.@.@@
@@ -19,6 +17,8 @@ public class Day4Tests
 .@@@@@@@@.
 @.@.@@@.@.";
 
+    private readonly Day4 _day4 = new Day4();
+
     [Fact]
     public void Puzzle1_WithSampleInput_ShouldReturnExpectedResult()
     {
@@ -29,8 +29,7 @@ public class Day4Tests
     public void Puzzle1_WithInputFile_ShouldReturnExpectedResult()
     {
         string input = File.ReadAllText(
-            Path.Combine("..", "..", "..", "..", "AdventOfCode2025", "input", "day4input.txt")
-        );
+            Path.Combine("..", "..", "..", "..", "AdventOfCode2025", "input", "day4input.txt"));
 
         Assert.Equal("1523", _day4.SolvePuzzle1(input));
     }
@@ -45,10 +44,8 @@ public class Day4Tests
     public void Puzzle2_WithInputFile_ShouldReturnExpectedResult()
     {
         string input = File.ReadAllText(
-            Path.Combine("..", "..", "..", "..", "AdventOfCode2025", "input", "day4input.txt")
-        );
+            Path.Combine("..", "..", "..", "..", "AdventOfCode2025", "input", "day4input.txt"));
 
         Assert.Equal("9290", _day4.SolvePuzzle2(input));
     }
 }
-

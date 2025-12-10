@@ -3,9 +3,6 @@ using System.Collections.Generic;
 
 namespace AdventOfCode2025.Days;
 
-/// <summary>
-/// Day 4: Forklift Access
-/// </summary>
 public class Day4 : IPuzzle
 {
     public string SolvePuzzle1(string input)
@@ -88,7 +85,9 @@ public class Day4 : IPuzzle
 
             // If no accessible rolls found, we're done
             if (accessiblePositions.Count == 0)
+            {
                 break;
+            }
 
             // Remove all accessible rolls at once
             foreach (var (row, col) in accessiblePositions)
@@ -114,7 +113,9 @@ public class Day4 : IPuzzle
             {
                 // Skip the center position (the roll itself)
                 if (dr == 0 && dc == 0)
+                {
                     continue;
+                }
 
                 int newRow = row + dr;
                 int newCol = col + dc;
@@ -133,4 +134,3 @@ public class Day4 : IPuzzle
         return count;
     }
 }
-

@@ -1,8 +1,5 @@
 namespace AdventOfCode2025.Days;
 
-/// <summary>
-/// Day 1: Secret Entrance
-/// </summary>
 public class Day1 : IPuzzle
 {
     public string SolvePuzzle1(string input)
@@ -20,15 +17,20 @@ public class Day1 : IPuzzle
             {
                 position = (position - distance) % 100;
                 if (position < 0)
+                {
                     position += 100;
+                }
             }
-            else // 'R'
+            else
             {
+                // 'R'
                 position = (position + distance) % 100;
             }
 
             if (position == 0)
+            {
                 timesAt0++;
+            }
         }
 
         return timesAt0.ToString();
@@ -53,35 +55,53 @@ public class Day1 : IPuzzle
                 {
                     var currentPos = (position - i) % 100;
                     if (currentPos < 0)
+                    {
                         currentPos += 100;
-                    if (currentPos == 0) // Passed through 0
+                    }
+
+                    // Passed through 0
+                    if (currentPos == 0)
+                    {
                         timesAt0++;
+                    }
                 }
 
                 // Check if end position is 0
                 var endPos = (position - distance) % 100;
                 if (endPos < 0)
+                {
                     endPos += 100;
+                }
+
                 if (endPos == 0)
+                {
                     timesAt0++;
+                }
 
                 position = endPos;
             }
-            else // 'R'
+            else
             {
+                // 'R'
                 // Check positions during rotation (excluding start and end)
                 // From (position + 1) up to (position + distance - 1) mod 100
                 for (int i = 1; i < distance; i++)
                 {
                     var currentPos = (position + i) % 100;
-                    if (currentPos == 0) // Passed through 0
+
+                    // Passed through 0
+                    if (currentPos == 0)
+                    {
                         timesAt0++;
+                    }
                 }
 
                 // Check if end position is 0
                 var endPos = (position + distance) % 100;
                 if (endPos == 0)
+                {
                     timesAt0++;
+                }
 
                 position = endPos;
             }
@@ -90,4 +110,3 @@ public class Day1 : IPuzzle
         return timesAt0.ToString();
     }
 }
-

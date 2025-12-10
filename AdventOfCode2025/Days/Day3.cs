@@ -2,9 +2,6 @@ using System;
 
 namespace AdventOfCode2025.Days;
 
-/// <summary>
-/// Day 3: Escalator Power
-/// </summary>
 public class Day3 : IPuzzle
 {
     public string SolvePuzzle1(string input)
@@ -16,7 +13,9 @@ public class Day3 : IPuzzle
         {
             var trimmedLine = line.Trim();
             if (trimmedLine.Length == 0)
+            {
                 continue;
+            }
 
             var maxJoltage = FindMaxJoltage2Digits(trimmedLine);
             totalJoltage += maxJoltage;
@@ -34,7 +33,9 @@ public class Day3 : IPuzzle
         {
             var trimmedLine = line.Trim();
             if (trimmedLine.Length == 0)
+            {
                 continue;
+            }
 
             var maxJoltage = FindMaxJoltage12Digits(trimmedLine);
             totalJoltage += maxJoltage;
@@ -54,10 +55,12 @@ public class Day3 : IPuzzle
             {
                 var firstDigit = bank[i] - '0';
                 var secondDigit = bank[j] - '0';
-                var joltage = firstDigit * 10 + secondDigit;
+                var joltage = (firstDigit * 10) + secondDigit;
 
                 if (joltage > maxJoltage)
+                {
                     maxJoltage = joltage;
+                }
             }
         }
 
@@ -77,7 +80,6 @@ public class Day3 : IPuzzle
         // We need to select exactly 12 digits to form the largest number
         // Use greedy approach: for each position, pick the largest digit possible
         // while ensuring we can still complete the remaining positions
-
         var result = new char[targetLength];
         int resultIndex = 0;
         int startIndex = 0;
@@ -109,4 +111,3 @@ public class Day3 : IPuzzle
         return long.Parse(new string(result));
     }
 }
-

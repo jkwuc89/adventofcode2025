@@ -1,0 +1,57 @@
+{
+  "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
+  "rules": {
+    "SA1633": {
+      "enabled": false,
+      "severity": "none"
+    },
+    "SA1634": {
+      "enabled": false,
+      "severity": "none"
+    },
+    "SA1635": {
+      "enabled": false,
+      "severity": "none"
+    },
+    "SA1636": {
+      "enabled": false,
+      "severity": "none"
+    }
+  },
+  "settings": {
+    "indentation": {
+      "indentationSize": 4,
+      "tabSize": 4,
+      "useTabs": false
+    },
+    "layoutRules": {
+      "newlineAtEndOfFile": "require"
+    },
+    "documentationRules": {
+      "companyName": "",
+      "copyrightText": "",
+      "documentExposedElements": false,
+      "documentInternalElements": false,
+      "documentPrivateElements": false,
+      "documentPrivateFields": false,
+      "documentInterfaces": true,
+      "documentPublicMethods": true,
+      "documentPublicProperties": true,
+      "documentPublicClasses": true,
+      "documentPublicConstructors": true,
+      "documentPublicEvents": true,
+      "documentPublicFields": true,
+      "fileNamingConvention": "stylecop"
+    },
+    "namingRules": {
+      "allowCommonHungarianPrefixes": true,
+      "allowedHungarianPrefixes": []
+    },
+    "orderingRules": {
+      "usingDirectivesPlacement": "outsideNamespace",
+      "systemUsingDirectivesFirst": true,
+      "blankLinesBetweenUsingGroups": "require"
+    }
+  }
+}
+

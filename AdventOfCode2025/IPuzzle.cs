@@ -19,4 +19,3 @@ public interface IPuzzle
     /// <returns>The solution as a string.</returns>
     string SolvePuzzle2(string input);
 }
-

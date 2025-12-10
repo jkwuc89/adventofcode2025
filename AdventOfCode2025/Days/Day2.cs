@@ -3,9 +3,6 @@ using System.Collections.Generic;
 
 namespace AdventOfCode2025.Days;
 
-/// <summary>
-/// Day 2: Invalid IDs
-/// </summary>
 public class Day2 : IPuzzle
 {
     public string SolvePuzzle1(string input)
@@ -18,7 +15,9 @@ public class Day2 : IPuzzle
             for (long value = start; value <= end; value++)
             {
                 if (IsInvalidIdPuzzle1(value))
+                {
                     sum += value;
+                }
             }
         }
 
@@ -35,7 +34,9 @@ public class Day2 : IPuzzle
             for (long value = start; value <= end; value++)
             {
                 if (IsInvalidIdPuzzle2(value))
+                {
                     sum += value;
+                }
             }
         }
 
@@ -51,11 +52,15 @@ public class Day2 : IPuzzle
         {
             var part = rawPart.Trim();
             if (part.Length == 0)
+            {
                 continue;
+            }
 
             var dashIndex = part.IndexOf('-');
             if (dashIndex < 0)
+            {
                 continue;
+            }
 
             var start = long.Parse(part.AsSpan(0, dashIndex));
             var end = long.Parse(part.AsSpan(dashIndex + 1));
@@ -68,8 +73,12 @@ public class Day2 : IPuzzle
     private static bool IsInvalidIdPuzzle1(long value)
     {
         var text = value.ToString();
-        if ((text.Length & 1) == 1) // odd length cannot be two repeated halves
+
+        // odd length cannot be two repeated halves
+        if ((text.Length & 1) == 1)
+        {
             return false;
+        }
 
         var halfLength = text.Length / 2;
         var first = text.AsSpan(0, halfLength);
@@ -87,7 +96,9 @@ public class Day2 : IPuzzle
         for (int k = 2; k <= length; k++)
         {
             if (length % k != 0)
+            {
                 continue;
+            }
 
             var partLength = length / k;
             var firstPart = text.AsSpan(0, partLength);
@@ -105,10 +116,11 @@ public class Day2 : IPuzzle
             }
 
             if (allMatch)
+            {
                 return true;
+            }
         }
 
         return false;
     }
 }
-

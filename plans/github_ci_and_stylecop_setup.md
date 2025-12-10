@@ -4,16 +4,16 @@ overview: Add GitHub Actions CI workflow to build and test the project, and conf
 todos:
   - id: create-github-workflow
     content: Create .github/workflows/ci.yml with build, test, and StyleCop analysis steps
-    status: pending
+    status: completed
   - id: add-stylecop-packages
-    content: Add StyleCop.Analyzers NuGet package to both .csproj files
-    status: pending
+    content: Add StyleCop.Analyzers NuGet package (1.1.118) to both .csproj files
+    status: completed
   - id: create-stylecop-config
-    content: Create stylecop.json configuration file with widely used defaults
-    status: pending
+    content: Create stylecop.json configuration file with widely used defaults aligned with .editorconfig
+    status: completed
   - id: configure-projects-stylecop
-    content: Configure both .csproj files to reference stylecop.json and enable code analysis
-    status: pending
+    content: Configure both .csproj files to reference stylecop.json, enable code analysis, and treat warnings as errors
+    status: completed
 ---
 
 # GitHub CI and StyleCop Setup
@@ -26,58 +26,60 @@ This plan adds a GitHub Actions CI workflow that builds the project, runs tests,
 
 ### 1. Create GitHub Actions Workflow
 
-Create `.github/workflows/ci.yml` that:
+Create [`.github/workflows/ci.yml`](.github/workflows/ci.yml) that:
 
-- Runs on push and pull requests
+- Runs on push and pull requests to main/master branches
 - Uses the latest Ubuntu runner
-- Sets up .NET SDK (matching the project's target framework)
+- Sets up .NET SDK 10.0 (matching the project's target framework)
 - Restores dependencies
-- Builds the solution
+- Builds the solution using `dotnet build`
 - Runs all tests using `dotnet test`
-- Runs StyleCop analysis as part of the build (configured in project files)
+- StyleCop analysis runs automatically as part of the build (configured in project files)
 - Fails if any step fails
 
 ### 2. Add StyleCop Analyzers Package
 
-Add `StyleCop.Analyzers` NuGet package to both:
+Add `StyleCop.Analyzers` NuGet package (version 1.1.118) to both:
 
-- `AdventOfCode2025/AdventOfCode2025.csproj`
-- `AdventOfCode2025.Tests/AdventOfCode2025.Tests.csproj`
-
-Use the latest stable version (typically 1.1.118 or newer).
+- [`AdventOfCode2025/AdventOfCode2025.csproj`](AdventOfCode2025/AdventOfCode2025.csproj)
+- [`AdventOfCode2025.Tests/AdventOfCode2025.Tests.csproj`](AdventOfCode2025.Tests/AdventOfCode2025.Tests.csproj)
 
 ### 3. Create StyleCop Configuration
 
-Create `stylecop.json` in the solution root with widely used defaults:
+Create [`stylecop.json`](stylecop.json) in the solution root with widely used defaults:
 
-- Enable documentation rules (SA1600, SA1601, SA1602) but allow missing documentation for now
-- Use standard indentation and spacing rules
-- Configure file naming conventions
-- Set copyright header rules (can be disabled if not needed)
+- Disable file header rules (SA1633, SA1634, SA1635, SA1636) as configured in .editorconfig
+- Use standard indentation (4 spaces) and spacing rules
+- Configure using directives placement (outside namespace for file-scoped namespaces)
+- Set documentation rules to allow missing documentation for private/internal elements
 - Use common rule severity settings
 
 ### 4. Configure Projects for StyleCop
 
 Update both `.csproj` files to:
 
-- Reference the `stylecop.json` file
-- Enable code analysis during build
-- Treat StyleCop warnings as errors (optional, but common in CI)
+- Reference the `stylecop.json` file via AdditionalFiles
+- Enable code analysis during build (`EnforceCodeStyleInBuild`)
+- Treat StyleCop warnings as errors (`TreatWarningsAsErrors`) to fail CI on violations
 
-### 5. Update CI Workflow for StyleCop
+### 5. Verify Integration
 
-Ensure the CI workflow treats analyzer warnings/errors appropriately. The build will automatically fail if StyleCop violations are configured as errors.
+Ensure the CI workflow will:
+
+- Automatically run StyleCop analyzers during `dotnet build`
+- Fail the build if StyleCop violations are found (since warnings are treated as errors)
+- Run tests after successful build
 
 ## Files to Create/Modify
 
-- **Create**: `.github/workflows/ci.yml` - GitHub Actions workflow
-- **Create**: `stylecop.json` - StyleCop configuration file
-- **Modify**: `AdventOfCode2025/AdventOfCode2025.csproj` - Add StyleCop package and configuration
-- **Modify**: `AdventOfCode2025.Tests/AdventOfCode2025.Tests.csproj` - Add StyleCop package and configuration
+- **Create**: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) - GitHub Actions workflow
+- **Create**: [`stylecop.json`](stylecop.json) - StyleCop configuration file
+- **Modify**: [`AdventOfCode2025/AdventOfCode2025.csproj`](AdventOfCode2025/AdventOfCode2025.csproj) - Add StyleCop package and configuration
+- **Modify**: [`AdventOfCode2025.Tests/AdventOfCode2025.Tests.csproj`](AdventOfCode2025.Tests/AdventOfCode2025.Tests.csproj) - Add StyleCop package and configuration
 
 ## Notes
 
 - The workflow will use `dotnet build` and `dotnet test` commands which will automatically run StyleCop analyzers
-- StyleCop configuration uses widely accepted defaults that balance code quality with practical development
-- Documentation rules may need adjustment based on project preferences, but will be set to warnings initially to avoid breaking existing code
-
+- StyleCop configuration will align with existing `.editorconfig` settings (file headers disabled, etc.)
+- The build will fail if StyleCop violations are found, ensuring code quality in CI
+- StyleCop rules disabled in `.editorconfig` (SA1200, SA1600, etc.) will remain disabled
