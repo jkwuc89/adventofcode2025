@@ -22,7 +22,7 @@ if (!int.TryParse(args[1], out int puzzle) || (puzzle != 1 && puzzle != 2))
 }
 
 // Get the puzzle instance
-IPuzzle? puzzleInstance = GetPuzzleInstance(day);
+IPuzzle? puzzleInstance = PuzzleFactory.GetPuzzleInstance(day);
 if (puzzleInstance == null)
 {
     Console.Error.WriteLine($"Day {day} is not yet implemented.");
@@ -45,19 +45,3 @@ string result = puzzle == 1
     : puzzleInstance.SolvePuzzle2(input);
 
 Console.WriteLine(result);
-
-static IPuzzle? GetPuzzleInstance(int day)
-{
-    return day switch
-    {
-        1 => new Day1(),
-        2 => new Day2(),
-        3 => new Day3(),
-        4 => new Day4(),
-        5 => new Day5(),
-        6 => new Day6(),
-
-        // Add more days as they are implemented
-        _ => null
-    };
-}
