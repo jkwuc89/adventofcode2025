@@ -54,6 +54,7 @@ static IPuzzle? GetPuzzleInstance(int day)
         2 => new Day2(),
         3 => new Day3(),
         4 => new Day4(),
+        5 => new Day5(),
 
         // Add more days as they are implemented
         _ => null
