@@ -24,7 +24,18 @@ public class Day11 : IPuzzle
 
     public string SolvePuzzle2(string input)
     {
-        return "0";
+        var lines = input
+            .Trim()
+            .Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+
+        if (lines.Length == 0)
+        {
+            return "0";
+        }
+
+        var graph = ParseGraph(lines);
+        long paths = CountPathsWithRequiredNodes("svr", "out", graph, "dac", "fft");
+        return paths.ToString();
     }
 
     private static Dictionary<string, List<string>> ParseGraph(IEnumerable<string> lines)
@@ -110,5 +121,69 @@ public class Day11 : IPuzzle
         }
 
         return Dfs(start);
+    }
+
+    private static long CountPathsWithRequiredNodes(
+        string start,
+        string target,
+        IReadOnlyDictionary<string, List<string>> graph,
+        string requiredA,
+        string requiredB)
+    {
+        int requiredMask = 0;
+        const int MaskA = 1;
+        const int MaskB = 2;
+        requiredMask |= MaskA | MaskB;
+
+        var memo = new Dictionary<(string Node, int Mask), long>();
+        var visiting = new HashSet<(string Node, int Mask)>();
+
+        long Dfs(string node, int mask)
+        {
+            if (node.Equals(requiredA, StringComparison.Ordinal))
+            {
+                mask |= MaskA;
+            }
+            else if (node.Equals(requiredB, StringComparison.Ordinal))
+            {
+                mask |= MaskB;
+            }
+
+            if (node.Equals(target, StringComparison.Ordinal))
+            {
+                return mask == requiredMask ? 1 : 0;
+            }
+
+            if (memo.TryGetValue((node, mask), out long cached))
+            {
+                return cached;
+            }
+
+            if (!graph.TryGetValue(node, out var neighbors) || neighbors.Count == 0)
+            {
+                memo[(node, mask)] = 0;
+                return 0;
+            }
+
+            if (visiting.Contains((node, mask)))
+            {
+                memo[(node, mask)] = 0;
+                return 0;
+            }
+
+            visiting.Add((node, mask));
+
+            long total = 0;
+            foreach (var next in neighbors)
+            {
+                total += Dfs(next, mask);
+            }
+
+            visiting.Remove((node, mask));
+            memo[(node, mask)] = total;
+            return total;
+        }
+
+        return Dfs(start, 0);
     }
 }
