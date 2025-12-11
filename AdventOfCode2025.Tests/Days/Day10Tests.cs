@@ -23,7 +23,21 @@ public class Day10Tests
         string input = File.ReadAllText(
             Path.Combine("..", "..", "..", "..", "AdventOfCode2025", "input", "day10input.txt"));
 
-        string result = _day10.SolvePuzzle1(input);
-        Assert.NotEmpty(result);
+        Assert.Equal("498", _day10.SolvePuzzle1(input));
+    }
+
+    [Fact]
+    public void Puzzle2_WithSampleInput_ShouldReturnExpectedResult()
+    {
+        Assert.Equal("33", _day10.SolvePuzzle2(SampleInput));
+    }
+
+    [Fact]
+    public void Puzzle2_WithInputFile_ShouldReturnResult()
+    {
+        string input = File.ReadAllText(
+            Path.Combine("..", "..", "..", "..", "AdventOfCode2025", "input", "day10input.txt"));
+
+        Assert.Equal("17133", _day10.SolvePuzzle2(input));
     }
 }
