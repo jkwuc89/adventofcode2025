@@ -27,7 +27,7 @@ public class PuzzleFactoryTests
     [Fact]
     public void GetPuzzleInstance_WithAllImplementedDays_ShouldReturnInstances()
     {
-        for (int day = 1; day <= 10; day++)
+        for (int day = 1; day <= 11; day++)
         {
             var instance = PuzzleFactory.GetPuzzleInstance(day);
             Assert.NotNull(instance);
