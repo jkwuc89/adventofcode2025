@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AdventOfCode2025;
 
 namespace AdventOfCode2025.Days;
 
@@ -8,7 +9,7 @@ public class Day9 : IPuzzle
 {
     public string SolvePuzzle1(string input)
     {
-        var lines = input.Trim().Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+        var lines = DayUtils.SplitNonEmptyLines(input);
         if (lines.Length == 0)
         {
             return "0";
@@ -193,7 +194,7 @@ public class Day9 : IPuzzle
 
     private static List<(long X, long Y)> ParsePoints(string input)
     {
-        var lines = input.Trim().Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+        var lines = DayUtils.SplitNonEmptyLines(input);
         var points = new List<(long X, long Y)>();
         foreach (var line in lines)
         {

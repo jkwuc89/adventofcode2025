@@ -1,4 +1,5 @@
 using System;
+using AdventOfCode2025;
 
 namespace AdventOfCode2025.Days;
 
@@ -6,7 +7,7 @@ public class Day3 : IPuzzle
 {
     public string SolvePuzzle1(string input)
     {
-        var lines = input.Trim().Split('\n');
+        var lines = DayUtils.SplitNonEmptyLines(input);
         long totalJoltage = 0;
 
         foreach (var line in lines)
@@ -26,7 +27,7 @@ public class Day3 : IPuzzle
 
     public string SolvePuzzle2(string input)
     {
-        var lines = input.Trim().Split('\n');
+        var lines = DayUtils.SplitNonEmptyLines(input);
         long totalJoltage = 0;
 
         foreach (var line in lines)

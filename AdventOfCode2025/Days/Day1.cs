@@ -1,10 +1,12 @@
+using AdventOfCode2025;
+
 namespace AdventOfCode2025.Days;
 
 public class Day1 : IPuzzle
 {
     public string SolvePuzzle1(string input)
     {
-        var lines = input.Trim().Split('\n');
+        var lines = DayUtils.SplitNonEmptyLines(input);
         var position = 50;
         var timesAt0 = 0;
 
@@ -38,7 +40,7 @@ public class Day1 : IPuzzle
 
     public string SolvePuzzle2(string input)
     {
-        var lines = input.Trim().Split('\n');
+        var lines = DayUtils.SplitNonEmptyLines(input);
         var position = 50;
         var timesAt0 = 0;
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AdventOfCode2025;
 
 namespace AdventOfCode2025.Days;
 
@@ -95,7 +96,7 @@ public class Day8 : IPuzzle
 
     private static List<(int X, int Y, int Z)> ParseCoordinates(string input)
     {
-        var lines = input.Trim().Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+        var lines = DayUtils.SplitNonEmptyLines(input);
         var boxes = new List<(int X, int Y, int Z)>();
 
         foreach (var line in lines)

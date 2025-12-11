@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using AdventOfCode2025;
 
 namespace AdventOfCode2025.Days;
 
@@ -7,7 +8,7 @@ public class Day4 : IPuzzle
 {
     public string SolvePuzzle1(string input)
     {
-        var lines = input.Trim().Split('\n');
+        var lines = DayUtils.SplitNonEmptyLines(input);
         var grid = new char[lines.Length][];
 
         // Parse grid
@@ -45,7 +46,7 @@ public class Day4 : IPuzzle
 
     public string SolvePuzzle2(string input)
     {
-        var lines = input.Trim().Split('\n');
+        var lines = DayUtils.SplitNonEmptyLines(input);
         var grid = new char[lines.Length][];
 
         // Parse grid
