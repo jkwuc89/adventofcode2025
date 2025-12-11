@@ -1,3 +1,4 @@
+```
 I want a plan for puzzle 2 on day 7. First some background information.
 
 Here is puzzle 1 for day 7. It is provided as background information when planning for puzzle 2. The plan for puzzle 1 is in @plans/day_7_puzzle_1_implementation.md .
@@ -193,3 +194,4 @@ Or, there's the timeline where the particle ends up at the same point as the alt
 In this example, in total, the particle ends up on 40 different timelines, meaning that there are 40 unique pathways from the S at the top to any exit position at the bottom using the example data above. In puzzle 2 when a particle hits a splitter, it does not split into two timelines. Instead, it moves to the right or to the left, create two unique pathways around that splitter.
 
 Apply the many-worlds interpretation of quantum tachyon splitting to your manifold diagram. Specifically, timelines are unique pathways through the manifold. So, the solution needs to traverse and identify every unique pathway, starting at the S at the top and exiting at the bottom. In total, how many different timelines would a single tachyon particle end up on?
+```

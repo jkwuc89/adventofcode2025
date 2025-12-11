@@ -73,3 +73,4 @@ Add tests to [`AdventOfCode2025.Tests/Days/Day7Tests.cs`](AdventOfCode2025.Tests
 - Recursive calls handle left/right paths at splitters
 - Base case returns 1 when reaching bottom (any column is valid exit)
 
+
