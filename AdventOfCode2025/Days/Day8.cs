@@ -8,46 +8,13 @@ public class Day8 : IPuzzle
 {
     public string SolvePuzzle1(string input)
     {
-        var lines = input.Trim().Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-        if (lines.Length == 0)
-        {
-            return "0";
-        }
-
-        // Parse coordinates
-        var boxes = new List<(int X, int Y, int Z)>();
-        foreach (var line in lines)
-        {
-            var parts = line.Trim().Split(',');
-            if (parts.Length == 3 &&
-                int.TryParse(parts[0], out int x) &&
-                int.TryParse(parts[1], out int y) &&
-                int.TryParse(parts[2], out int z))
-            {
-                boxes.Add((x, y, z));
-            }
-        }
-
+        var boxes = ParseCoordinates(input);
         if (boxes.Count == 0)
         {
             return "0";
         }
 
-        // Calculate all pairwise distances
-        var distances = new List<(int Box1, int Box2, double Distance)>();
-        for (int i = 0; i < boxes.Count; i++)
-        {
-            for (int j = i + 1; j < boxes.Count; j++)
-            {
-                double distance = CalculateEuclideanDistance(boxes[i], boxes[j]);
-                distances.Add((i, j, distance));
-            }
-        }
-
-        // Sort by distance (shortest first)
-        distances.Sort((a, b) => a.Distance.CompareTo(b.Distance));
-
-        // Initialize Union-Find
+        var distances = CalculateAllPairwiseDistances(boxes);
         var unionFind = new UnionFind(boxes.Count);
 
         // Determine number of connections: 10 for sample (20 boxes), 1000 for full input
@@ -71,16 +38,8 @@ public class Day8 : IPuzzle
             }
         }
 
-        // Count circuit sizes
-        var circuitSizes = new Dictionary<int, int>();
-        for (int i = 0; i < boxes.Count; i++)
-        {
-            int root = unionFind.Find(i);
-            circuitSizes.TryGetValue(root, out int count);
-            circuitSizes[root] = count + 1;
-        }
-
         // Get three largest circuits
+        var circuitSizes = GetCircuitSizes(unionFind, boxes.Count);
         var sizes = circuitSizes.Values.OrderByDescending(s => s).Take(3).ToList();
         if (sizes.Count < 3)
         {
@@ -93,7 +52,105 @@ public class Day8 : IPuzzle
 
     public string SolvePuzzle2(string input)
     {
-        return "0";
+        var boxes = ParseCoordinates(input);
+        if (boxes.Count == 0)
+        {
+            return "0";
+        }
+
+        var distances = CalculateAllPairwiseDistances(boxes);
+        var unionFind = new UnionFind(boxes.Count);
+
+        // Track the last connection made
+        int lastBox1 = -1;
+        int lastBox2 = -1;
+
+        // Connect pairs until all boxes are in one circuit
+        foreach (var (box1, box2, _) in distances)
+        {
+            // Only connect if not already in same circuit
+            if (unionFind.Find(box1) != unionFind.Find(box2))
+            {
+                unionFind.Union(box1, box2);
+                lastBox1 = box1;
+                lastBox2 = box2;
+
+                // Check if all boxes are now in one circuit
+                if (CountCircuits(unionFind, boxes.Count) == 1)
+                {
+                    // This is the last connection that completes the single circuit
+                    break;
+                }
+            }
+        }
+
+        if (lastBox1 == -1 || lastBox2 == -1)
+        {
+            return "0";
+        }
+
+        long product = (long)boxes[lastBox1].X * boxes[lastBox2].X;
+        return product.ToString();
+    }
+
+    private static List<(int X, int Y, int Z)> ParseCoordinates(string input)
+    {
+        var lines = input.Trim().Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+        var boxes = new List<(int X, int Y, int Z)>();
+
+        foreach (var line in lines)
+        {
+            var parts = line.Trim().Split(',');
+            if (parts.Length == 3 &&
+                int.TryParse(parts[0], out int x) &&
+                int.TryParse(parts[1], out int y) &&
+                int.TryParse(parts[2], out int z))
+            {
+                boxes.Add((x, y, z));
+            }
+        }
+
+        return boxes;
+    }
+
+    private static List<(int Box1, int Box2, double Distance)> CalculateAllPairwiseDistances(List<(int X, int Y, int Z)> boxes)
+    {
+        var distances = new List<(int Box1, int Box2, double Distance)>();
+        for (int i = 0; i < boxes.Count; i++)
+        {
+            for (int j = i + 1; j < boxes.Count; j++)
+            {
+                double distance = CalculateEuclideanDistance(boxes[i], boxes[j]);
+                distances.Add((i, j, distance));
+            }
+        }
+
+        distances.Sort((a, b) => a.Distance.CompareTo(b.Distance));
+        return distances;
+    }
+
+    private static Dictionary<int, int> GetCircuitSizes(UnionFind unionFind, int boxCount)
+    {
+        var circuitSizes = new Dictionary<int, int>();
+        for (int i = 0; i < boxCount; i++)
+        {
+            int root = unionFind.Find(i);
+            circuitSizes.TryGetValue(root, out int count);
+            circuitSizes[root] = count + 1;
+        }
+
+        return circuitSizes;
+    }
+
+    private static int CountCircuits(UnionFind unionFind, int boxCount)
+    {
+        var roots = new HashSet<int>();
+        for (int i = 0; i < boxCount; i++)
+        {
+            roots.Add(unionFind.Find(i));
+        }
+
+        return roots.Count;
     }
 
     private static double CalculateEuclideanDistance((int X, int Y, int Z) p1, (int X, int Y, int Z) p2)

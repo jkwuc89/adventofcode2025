@@ -42,4 +42,19 @@ public class Day8Tests
 
         Assert.Equal("79056", _day8.SolvePuzzle1(input));
     }
+
+    [Fact]
+    public void Puzzle2_WithSampleInput_ShouldReturnExpectedResult()
+    {
+        Assert.Equal("25272", _day8.SolvePuzzle2(SampleInput));
+    }
+
+    [Fact]
+    public void Puzzle2_WithInputFile_ShouldReturnExpectedResult()
+    {
+        string input = File.ReadAllText(
+            Path.Combine("..", "..", "..", "..", "AdventOfCode2025", "input", "day8input.txt"));
+
+        Assert.Equal("4639477", _day8.SolvePuzzle2(input));
+    }
 }
