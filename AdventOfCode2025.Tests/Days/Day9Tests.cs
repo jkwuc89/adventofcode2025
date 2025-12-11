@@ -30,4 +30,19 @@ public class Day9Tests
 
         Assert.Equal("4755064176", _day9.SolvePuzzle1(input));
     }
+
+    [Fact]
+    public void Puzzle2_WithSampleInput_ShouldReturnExpectedResult()
+    {
+        Assert.Equal("24", _day9.SolvePuzzle2(SampleInput));
+    }
+
+    [Fact]
+    public void Puzzle2_WithInputFile_ShouldReturnExpectedResult()
+    {
+        string input = File.ReadAllText(
+            Path.Combine("..", "..", "..", "..", "AdventOfCode2025", "input", "day9input.txt"));
+
+        Assert.Equal("1613305596", _day9.SolvePuzzle2(input));
+    }
 }
